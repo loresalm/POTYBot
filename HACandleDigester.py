@@ -30,6 +30,7 @@ class HACandleDigester():
 	def updateHACandleDigester(self):
 		if len(self.candlesHistory) < 3:
 			self.candlesHistory.append(self.currentCandle)
+			print ()
 		else:
 			self.candlesHistory[2] = self.candlesHistory[1]
 			self.candlesHistory[1] = self.candlesHistory[0]
@@ -64,9 +65,9 @@ class HACandleDigester():
 		if self.candleColor(newCandle) == self.candleColor(oldCandle):
 			return 'Same'
 		elif self.candleColor(newCandle) == 'red' and self.candleColor(oldCandle) == 'green':
-			return 'RedGreen'
-		else:
 			return 'GreenRed'
+		else:
+			return 'RedGreen'
 
 
 	

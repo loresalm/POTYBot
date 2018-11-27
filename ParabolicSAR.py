@@ -20,39 +20,36 @@ class ParabolicSAR():
 			self.accelerationFactor= 0.2
 			self.previousSar= high + 10.5
 			self.parabolicSARdata.append(self.previousSar)
-			self.fallingParabolicSAR()
-			self.bearish= True # falling time
+			self.bearish= True 
 
 		else: 
 			self.extremePoint= high
 			self.accelerationFactor= 0.2
 			self.previousSar= low - 10.5			
-			self.parabolicSARdata.append(self.previousSar)			
-			self.risingParabolicSAR()
-
-
-			self.bullish= True # rising time.
+			self.parabolicSARdata.append(self.previousSar)						
+			self.bullish= True 
 
 	def parabolicSAR(self, high, low):
 
 		if self.bullish== True:
 
+			self.risingParabolicSAR()
+
 			if high> self.extremePoint:
-				self.extremePoint= high
-				self.accelerationFactor+= 0.2
+					self.extremePoint= high
+					self.accelerationFactor+= 0.2
 
 
 			if low> self.currentSar:
-				self.parabolicSARdata.append(self.currentSar)	
+				self.parabolicSARdata.append(self.currentSar)
 				self.previousSar= self.currentSar			
-				self.risingParabolicSAR()
-
+				
+				
 			else:
 				self.previousSar= self.extremePoint
 				self.parabolicSARdata.append(self.previousSar)
 				self.extremePoint= low
 				self.accelerationFactor= 0.2
-				self.fallingParabolicSAR()
 				self.bullish= False
 				self.bearish= True
 
@@ -62,22 +59,21 @@ class ParabolicSAR():
 				
 		if self.bearish== True:
 
+			self.fallingParabolicSAR()
+			
 			if low< self.extremePoint:
-				self.extremePointL= low
-				self.accelerationFactor+= 0.2
+				self.extremePoint= low
+				self.accelerationFactor+= 0.2	
 
 			if high< self.currentSar:
 				self.parabolicSARdata.append(self.currentSar)
 				self.previousSar= self.currentSar	
-				self.fallingParabolicSAR()
-				
 
 			else:
 				self.previousSar= self.extremePoint
 				self.parabolicSARdata.append(self.previousSar)
 				self.extremePoint= high
 				self.accelerationFactor= 0.2
-				self.risingParabolicSAR()
 				self.bullish= True
 				self.bearish= False
 

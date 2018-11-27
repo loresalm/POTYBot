@@ -8,7 +8,7 @@ import matplotlib.patches as patches
 
 
 
-testRun = Run('ETHUSDT','1d','2018.09.15 00:00:00','2018.11.01 00:00:00')
+testRun = Run('ETHUSDT','1d','2018.06.15 00:00:00','2018.11.01 00:00:00')
 
 pricesList = testRun.getPriceList()
 time = testRun.getTime()
@@ -98,13 +98,12 @@ for i in range(0,len(time)):
 
 for i in range(1,len(time)):
 
-
 	SAR.parabolicSAR(pricesList[1][i], pricesList[2][i])
 
 
-print len(time)
-print len(SAR.getParabolicSAR())
-plt.plot(time, SAR.getParabolicSAR(),'ro')
+
+
+plt.plot(time, SAR.getParabolicSAR(),'4')
 plt.grid(True)
 ax.set_xlim(-0.5, len(time))
 ax.set_ylim(min(pricesList[2])-1,max(pricesList[1])+1)

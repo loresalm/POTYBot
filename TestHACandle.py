@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 
 
-testRun = Run('ETHUSDT','15m','2018.11.17 00:00:00','2018.11.20 00:00:00')
+testRun = Run('ETHUSDT','1d','2018.09.17 00:00:00','2018.11.25 00:00:00')
 
 #print testRun.getPriceList()
 
@@ -20,20 +20,21 @@ BUYSELLgraph = fig.add_subplot(212)
 
 HACandles_ = HACandles(pricesList[0][0], pricesList[1][0], pricesList[2][0], pricesList[3][0], time[0]) 
 
+
 HACandlesDigester_ = HACandleDigester()
 
 analys = Analyzer(10000,100,1.001)
 
-for i in time:
+for i in range(1, len(time)):
 
 	if i== len(time)-1:
     		print""
     		print"FINISH"
     		print""
-    	else:
+   	else:
 		HACandles_.CandleHA_Generator(pricesList[0][i], pricesList[1][i], pricesList[2][i], pricesList[3][i], time[i])
 		HACandleList_ = HACandles_.getCandlesList()
-		#print ("--->",HACandleList_)
+
 		if(HACandleList_[0][i] > HACandleList_[3][i]):
 			HACandles_.draw(HACandleGraph,'red',i)	
 		else:

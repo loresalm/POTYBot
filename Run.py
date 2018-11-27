@@ -1,6 +1,9 @@
 from binance.client import Client
 import pandas as pd
-
+"""@package docstring
+Documentation for this module.
+More details.
+"""
 
 class Run():
 

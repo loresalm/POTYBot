@@ -73,7 +73,8 @@ class Analyzer():
 		print" "
 		for i in range(0,len(self.tradeAverage)):
 			average+= self.tradeAverage[i]
-		print "TradeAverage ", average/len(self.tradeAverage), "%"
+		if len(self.tradeAverage)!=0:
+			print "TradeAverage ", average/len(self.tradeAverage), "%"
 
 
 

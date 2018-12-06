@@ -50,23 +50,41 @@ class ClassicCandles():
 			del self.candles_list[3][0]
 		return self.candles_list
 #################################################################################
-	def vertsCreator(self,dt):
-		verts = [
-			(dt,self.candles_list[3][dt]),
-			(dt-0.1,self.candles_list[3][dt]), 			
-			(dt-0.1,self.candles_list[1][dt]),  
-			(dt-0.105,self.candles_list[1][dt]),
-			(dt-0.105,self.candles_list[3][dt]),
-			(dt-0.2,self.candles_list[3][dt]),
-			(dt-0.2,self.candles_list[0][dt]),
-			(dt-0.105,self.candles_list[0][dt]),
-			(dt-0.105,self.candles_list[2][dt]),
-			(dt-0.1,self.candles_list[2][dt]),
-			(dt-0.1,self.candles_list[0][dt]),
-			(dt,self.candles_list[0][dt]),
-			(dt,self.candles_list[3][dt]),
-			]
-		return verts
+	def vertsCreator(self,candle,dt):
+		if candle[3]> candle[0]:
+			verts = [
+				(dt,candle[3]),
+				(dt-0.4,candle[3]), 			
+				(dt-0.4,candle[1]),  
+				(dt-0.405,candle[1]),
+				(dt-0.405,candle[3]),
+				(dt-0.8,candle[3]),
+				(dt-0.8,candle[0]),
+				(dt-0.405,candle[0]),
+				(dt-0.405,candle[2]),
+				(dt-0.4,candle[2]),
+				(dt-0.4,candle[0]),
+				(dt,candle[0]),
+				(dt,candle[3]),
+				]
+			return verts
+		else:
+			verts = [
+				(dt,candle[3]),
+				(dt-0.4,candle[3]), 			
+				(dt-0.4,candle[2]),  
+				(dt-0.405,candle[2]),
+				(dt-0.405,candle[3]),
+				(dt-0.8,candle[3]),
+				(dt-0.8,candle[0]),
+				(dt-0.405,candle[0]),
+				(dt-0.405,candle[1]),
+				(dt-0.4,candle[1]),
+				(dt-0.4,candle[0]),
+				(dt,candle[0]),
+				(dt,candle[3]),
+				]
+			return verts
 #################################################################################
 	def codesCreator(self):
 		codes = [
@@ -86,8 +104,8 @@ class ClassicCandles():
 			]
 		return codes
 #################################################################################
-	def draw(self,HACandleGraph, color, dt):
-		verts = self.vertsCreator(dt)
+	def draw(self,candle,HACandleGraph, color, dt):
+		verts = self.vertsCreator(candle,dt)
 		codes = self.codesCreator()
 		path = Path(verts, codes)
 		patch = patches.PathPatch(path, facecolor= color, lw=0.2)

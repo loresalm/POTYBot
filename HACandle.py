@@ -71,22 +71,42 @@ class HACandles():
 		return self.candles_list
 #################################################################################
 	def vertsCreator(self,candle,dt):
-		verts = [
-			(dt,candle[3]),
-			(dt-0.1,candle[3]), 			
-			(dt-0.1,candle[1]),  
-			(dt-0.105,candle[1]),
-			(dt-0.105,candle[3]),
-			(dt-0.2,candle[3]),
-			(dt-0.2,candle[0]),
-			(dt-0.105,candle[0]),
-			(dt-0.105,candle[2]),
-			(dt-0.1,candle[2]),
-			(dt-0.1,candle[0]),
-			(dt,candle[0]),
-			(dt,candle[3]),
-			]
-		return verts
+
+		if candle[3]> candle[0]:
+			verts = [
+				(dt,candle[3]),
+				(dt-0.4,candle[3]), 			
+				(dt-0.4,candle[1]),  
+				(dt-0.405,candle[1]),
+				(dt-0.405,candle[3]),
+				(dt-0.8,candle[3]),
+				(dt-0.8,candle[0]),
+				(dt-0.405,candle[0]),
+				(dt-0.405,candle[2]),
+				(dt-0.4,candle[2]),
+				(dt-0.4,candle[0]),
+				(dt,candle[0]),
+				(dt,candle[3]),
+				]
+			return verts
+		else:
+			verts = [
+				(dt,candle[3]),
+				(dt-0.4,candle[3]), 			
+				(dt-0.4,candle[2]),  
+				(dt-0.405,candle[2]),
+				(dt-0.405,candle[3]),
+				(dt-0.8,candle[3]),
+				(dt-0.8,candle[0]),
+				(dt-0.405,candle[0]),
+				(dt-0.405,candle[1]),
+				(dt-0.4,candle[1]),
+				(dt-0.4,candle[0]),
+				(dt,candle[0]),
+				(dt,candle[3]),
+				]
+			return verts
+
 #################################################################################
 	def codesCreator(self):
 		codes = [

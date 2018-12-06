@@ -9,10 +9,7 @@ from MacdDigester import MacdDigester
 from MacdLine import MacdLine
 from DigesterV0 import DigesterV0
 
-
-
-
-testRun = Run('ETHUSDT','1m','2018.10.01 00:00:00','2018.10.02 00:00:00')
+testRun = Run('ETHUSDT','30m','2018.11.01 00:00:00','2018.11.02 00:00:00')
 #get api data 
 pricesList = testRun.getPriceList()
 time = testRun.getTime()
@@ -65,9 +62,9 @@ for i in time:
 			HACandles_.draw(NewHACandle,HACandleGraph,'green',i)
 		#draw the ClassicCandles
 		if(NewClassicCandl[0] > NewClassicCandl[3]):
-			ClassicCandles_.draw(BUYSELLgraph,'red',i)	
+			ClassicCandles_.draw(NewClassicCandl,BUYSELLgraph,'red',i)	
 		else:
-			ClassicCandles_.draw(BUYSELLgraph,'green',i)
+			ClassicCandles_.draw(NewClassicCandl,BUYSELLgraph,'green',i)
 		#add the last candle to the digester
 		HACandlesDigester_.addHACandle(NewHACandle[0], NewHACandle[1], NewHACandle[2], NewHACandle[3])
 		#send the signal

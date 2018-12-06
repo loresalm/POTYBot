@@ -5,9 +5,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.path import Path
 import matplotlib.patches as patches
-from Candles import Candles
+#from Candles import Candles
 
-class HACandles(Candles):
+class HACandles():
 	# class variables:
 	newCandle = []
 	previousCandle = []
@@ -28,7 +28,7 @@ class HACandles(Candles):
 		self.candles_list.append(highList)
 		self.candles_list.append(lowList)
 		self.candles_list.append(closeList)			 
-		Candles.__init__(self)
+		#Candles.__init__(self)
 		print "initializing the HACandles"		
 		# initializing the first candle
 		self.newCandle.append(Open)
@@ -50,7 +50,7 @@ class HACandles(Candles):
 		self.candles_list[3][0] = self.newCandle[3]
 #################################################################################
 	def CandleHA_Generator(self, Open, high, low, close):
-		
+		#print 'BEFORE', self.previousCandle
 		# generating the newCandle using the privous candle
 		self.newCandle[0] = (self.previousCandle[0] + self.previousCandle[3]) / 2
 		self.newCandle[3] = (Open + high + low + close) / 4
@@ -59,13 +59,67 @@ class HACandles(Candles):
 		# store the candle in order to build and print the graphic
 		self.addCandleToCandleList(self.newCandle) 
 		#store the candle in order to build the next one
-		self.previousCandle.append(self.newCandle)	
+		self.previousCandle = []
+		self.previousCandle = self.newCandle
+		#print 'SIZE', (self.newCandle[0]-self.newCandle[3])
+		#print 'AFTER', self.previousCandle	
 #################################################################################
 	def getLastHACandle(self):
 		return self.newCandle
 #################################################################################
 	def getCandlesList(self):
 		return self.candles_list
+#################################################################################
+	def vertsCreator(self,candle,dt):
+		verts = [
+			(dt,candle[3]),
+			(dt-0.1,candle[3]), 			
+			(dt-0.1,candle[1]),  
+			(dt-0.105,candle[1]),
+			(dt-0.105,candle[3]),
+			(dt-0.2,candle[3]),
+			(dt-0.2,candle[0]),
+			(dt-0.105,candle[0]),
+			(dt-0.105,candle[2]),
+			(dt-0.1,candle[2]),
+			(dt-0.1,candle[0]),
+			(dt,candle[0]),
+			(dt,candle[3]),
+			]
+		return verts
+#################################################################################
+	def codesCreator(self):
+		codes = [
+			Path.MOVETO,
+			Path.LINETO,
+			Path.LINETO,
+			Path.LINETO,
+			Path.LINETO,
+			Path.LINETO,
+			Path.LINETO,
+			Path.LINETO,
+			Path.LINETO,
+			Path.LINETO,
+			Path.LINETO,
+			Path.LINETO,
+			Path.CLOSEPOLY,
+			]
+		return codes
+#################################################################################
+	def draw(self,candle,HACandleGraph, color, dt):
+		verts = self.vertsCreator(candle,dt)
+		codes = self.codesCreator()
+		path = Path(verts, codes)
+		patch = patches.PathPatch(path, facecolor= color, lw=0.2)
+		HACandleGraph.add_patch(patch)
+#################################################################################
+	def addCandleToCandleList(self,candle):
+		self.candles_list[0].append(candle[0])
+		self.candles_list[1].append(candle[1])
+		self.candles_list[2].append(candle[2])
+		self.candles_list[3].append(candle[3])
+		
+
 
 
 

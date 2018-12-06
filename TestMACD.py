@@ -5,7 +5,7 @@ from Analyzer import Analyzer
 from MacdLine import MacdLine
 import matplotlib.pyplot as plt
 
-testRun = Run('ETHUSDT','1h','2018.11.01 00:00:00','2018.11.20 00:00:00')
+testRun = Run('ETHUSDT','15m','2018.10.01 00:00:00','2018.10.02 00:00:00')
 
 pricesList = testRun.getPriceList()
 time = testRun.getTime()

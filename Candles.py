@@ -11,7 +11,7 @@ class Candles():
 	def __init__(self):
 		print "initializing the Candles"
 #################################################################################
-	def vertsCreator(self,priceHA,dt):
+	def vertsCreator(self,dt):
 		verts = [
 			(dt,self.candles_list[3][dt]),
 			(dt-0.1,self.candles_list[3][dt]), 			
@@ -54,7 +54,7 @@ class Candles():
 		self.candles_list[3].append(candle[3])
 #################################################################################
 	def draw(self,HACandleGraph, color, dt):
-		verts = self.vertsCreator(self.candles_list,dt)
+		verts = self.vertsCreator(dt)
 		codes = self.codesCreator()
 		path = Path(verts, codes)
 		patch = patches.PathPatch(path, facecolor= color, lw=0.2)

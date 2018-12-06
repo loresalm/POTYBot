@@ -27,7 +27,7 @@ class Analyzer():
 
 	def signalAnalyzer(self,signal,price,time):
 
-		if signal== "BUY":
+		if signal== "BUY" and self.lastTrade == "SELL":
 			self.investment=(self.quantityBuy/price)* self.fee
 			self.balance=float(self.balance)- self.quantityBuy
 			print" "
@@ -37,8 +37,8 @@ class Analyzer():
 
 			self.lastTrade= "BUY"
 
-		if signal== "SELL":
-			self.trade=(self.investment*price)* self.fee
+		if signal== "SELL" and self.lastTrade == "BUY":
+			self.trade=(self.investment*price)* (2-self.fee)
 			self.profit=(self.trade/self.quantityBuy)*100-100
 			self.tradeAverage.append(self.profit) 
 			self.balance+= self.trade

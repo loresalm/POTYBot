@@ -9,21 +9,21 @@ from MacdDigester import MacdDigester
 from MacdLine import MacdLine
 from DigesterV0 import DigesterV0
 
-testRun = Run('ETHUSDT','30m','2018.11.01 00:00:00','2018.11.02 00:00:00')
+testRun = Run('ETHUSDT','15m','2018.11.01 00:00:00','2018.11.03 00:00:00')
 #get api data 
 pricesList = testRun.getPriceList()
 time = testRun.getTime()
 #graph specifications
 fig = plt.figure()
-fig.canvas.set_window_title('graph')
-plt.legend()
-plt.grid(True)
+
+
 #graph subplots
 HACandleGraph = fig.add_subplot(311)
 HACandleGraph.grid(True)
 BUYSELLgraph = fig.add_subplot(313)
 BUYSELLgraph.grid(True)
 macdGraph = fig.add_subplot(312)
+macdGraph.grid(True)
 #data elaboration
 ClassicCandles_ = ClassicCandles()
 HACandles_ = HACandles(pricesList[0][0], pricesList[1][0], pricesList[2][0], pricesList[3][0]) 
@@ -67,10 +67,10 @@ for i in time:
 			ClassicCandles_.draw(NewClassicCandl,BUYSELLgraph,'green',i)
 		#add the last candle to the digester
 		HACandlesDigester_.addHACandle(NewHACandle[0], NewHACandle[1], NewHACandle[2], NewHACandle[3])
+		#updating the digester
+		digester.addSignals(HACandlesDigester_.sendHACandleSignal())
 		#send the signal
-		analys.signalAnalyzer(digester.sendSignal(HACandlesDigester_.sendHACandleSignal(),macdDigest.macdSignal(pricesList[3][i])),pricesList[0]
-[i+1],time[i+1])
-
+		analys.signalAnalyzer(digester.sendSignal(macdDigest.macdSignal(pricesList[3][i])),pricesList[0][i+1],time[i+1])
 #analysis data		
 analys.finalRapport()
 analys.drawAnalyzer(BUYSELLgraph)

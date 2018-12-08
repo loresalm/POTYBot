@@ -5,6 +5,7 @@ from MacdDigester import MacdDigester
  
 
 class DigesterV0():
+	signals = []
 #################################################################################
 	#constructor for Digester object:
 	def __init__(self):
@@ -18,11 +19,19 @@ class DigesterV0():
 		else:
 			return 'HOLD'
 #################################################################################
-	def sendSignal(self,HASignal, MacdSignal):
-		if HASignal == MacdSignal:
-			return HASignal
+	def sendSignal(self,MacdSignal):
+		for i in range (0,len(self.signals)):
+			if self.signals[i] == MacdSignal and MacdSignal!='HOLD':
+				return self.signals[i]
+		return 'HOLD'
+#################################################################################
+	def addSignals(self,HASignal):
+		if len(self.signals)<5:
+			self.signals.append(HASignal)
 		else:
-			return 'HOLD'
+			del self.signals[0]
+			self.signals.append(HASignal)			
+		
 
 
 
